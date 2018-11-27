@@ -10,15 +10,13 @@ package divideandconquer
 
 object EncodingNumbers extends App {
 
-  val encoding : Array[Char] = ('a' to 'z').toArray
-
   val inputNumber : String = "121"
 
   println(getNumberOfWays(inputNumber))
 
   def getNumberOfWays(number : String) : Int = {
 
-    def isPossible(n : Int) : Boolean = n <=26 && n>0
+    def isPossible(n : Int) : Boolean = n <= 26 && n> 0
 
     def ways(list: List[Char]): Int = list match {
       case Nil => 1
@@ -29,6 +27,6 @@ object EncodingNumbers extends App {
         else 0 )
     }
 
-    ways(number.toList)
+    if(number.isEmpty) 0 else ways(number.toList)
   }
 }
