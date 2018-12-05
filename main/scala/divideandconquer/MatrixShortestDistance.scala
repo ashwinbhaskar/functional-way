@@ -1,10 +1,25 @@
+package divideandconquer
+
+/*
+Given an 2d matrix of Ints containing only
+  1s : Road,
+  0s : Trench,
+  and one 9 : Goal
+
+Find the shortest distance to reach Goal(9) starting from (0,0)
+
+Constraints for moving - Up, Down, Left, Right
+                         You can only move on Roads (1s). A trench(0) means you cannot move on that.
+
+ */
+
 object MatrixShortestDistance extends App {
 
   val input : Array[Array[Int]] = Array(Array(1,1,9),Array(1,0,1),Array(1,0,0))
-  val trench = 0
-  val road = 1
-  val goal = 9
-  val infinity = Int.MaxValue
+  val TRENCH = 0
+  val ROAD = 1
+  val GOAL = 9
+  val INFINITY = Int.MaxValue
 
   println(findShortestPath(input))
 
@@ -14,12 +29,12 @@ object MatrixShortestDistance extends App {
 
     def isValid(point : (Int, Int)) : Boolean = point._1 >= 0 && point._1 < inputMatrix(0).length && point._2 >= 0 && point._2 < inputMatrix.length
 
-    def getRoads(x : Int,y : Int) : List[(Int,Int)] = List((x+1,y),(x-1,y),(x,y+1),(x,y-1)).filter(p => isValid(p) && (inputMatrix(p._1)(p._2) == road
-      || inputMatrix(p._1)(p._2) == goal))
+    def getRoads(x : Int,y : Int) : List[(Int,Int)] = List((x+1,y),(x-1,y),(x,y+1),(x,y-1)).filter(p => isValid(p) && (inputMatrix(p._1)(p._2) == ROAD
+      || inputMatrix(p._1)(p._2) == GOAL))
 
     def internalFunc(point : (Int,Int)) : Option[Int] = inputMatrix(point._1)(point._2) match {
-      case 9 => Some(0)
-      case 1 =>
+      case GOAL => Some(0)
+      case ROAD =>
         visited = visited + point
         val filteredPoints = getRoads(point._1, point._2).filterNot(visited.contains)
         if(filteredPoints.isEmpty) None
@@ -31,7 +46,7 @@ object MatrixShortestDistance extends App {
         }
     }
 
-    internalFunc(startXY).getOrElse(infinity)
+    internalFunc(startXY).getOrElse(INFINITY)
   }
 
 
