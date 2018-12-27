@@ -33,13 +33,10 @@ class Heap[T : Manifest](val arr : Array[T])(implicit ordering : Ordering[T]) {
   }
 
   private def trickleDown(index : Int)(implicit array : Array[T]) : Unit = {
-    val leastChildIndex = getLeastChildIndex(index)
-    if(leastChildIndex.isDefined) {
-      val wasSwapped = swapIfConditionMatches(leastChildIndex.get, index)
-      if(wasSwapped){
-        trickleDown(leastChildIndex.get)
-      }
-    }
+    getLeastChildIndex(index).fold(ifEmpty = {})(f = {leastIndex =>
+      val wasSwapped = swapIfConditionMatches(leastIndex, index)
+      if(wasSwapped) trickleDown(leastIndex)
+    })
   }
 
   private def swapIfConditionMatches(index1 : Int, index2 : Int)(implicit array: Array[T],  condition : (T, T) => Boolean) :  Boolean = {
