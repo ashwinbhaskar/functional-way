@@ -7,7 +7,7 @@ package heapsort
 class Heap[T : Manifest](val arr : Array[T])(implicit ordering : Ordering[T]) {
 
 
-  private implicit var heapSize : Int = arr.length
+  private var heapSize : Int = arr.length
 
   implicit val comparison : (T,T) => Boolean = (a : T, b: T) => ordering.compare(a,b) < 0
 
@@ -18,11 +18,11 @@ class Heap[T : Manifest](val arr : Array[T])(implicit ordering : Ordering[T]) {
 
   def getAll : Array[T] = (0 until heapSize).map(_ => getMin).toArray
 
-  private def removeHead(array : Array[T]) : T = {
-    val head = array.head
-    swap(heapSize-1, 0)(array)
+  private def removeHead(a : Array[T]) : T = {
+    val head = a.head
+    swap(heapSize-1, 0, a)
     heapSize = heapSize - 1
-    trickleDown(0)(array)
+    trickleDown(0)(a)
     head
   }
 
@@ -32,54 +32,49 @@ class Heap[T : Manifest](val arr : Array[T])(implicit ordering : Ordering[T]) {
     inputArray
   }
 
-  private def trickleDown(index : Int)(implicit array : Array[T]) : Unit = {
-    getLeastChildIndex(index).fold(ifEmpty = {})(f = {leastIndex =>
-      val wasSwapped = swapIfConditionMatches(leastIndex, index)
+  private def trickleDown(index : Int)(implicit a: Array[T]) : Unit = {
+    getLeastChildIndex(index, a).fold(ifEmpty = {})(f = {leastIndex =>
+      val wasSwapped = swapIfConditionMatches(leastIndex, index, a)
       if(wasSwapped) trickleDown(leastIndex)
     })
   }
 
-  private def swapIfConditionMatches(index1 : Int, index2 : Int)(implicit array: Array[T],  condition : (T, T) => Boolean) :  Boolean = {
-    if(condition(array{index1}, array{index2})) {
-      swap(index1, index2)(array)
+  private def swapIfConditionMatches(index1 : Int, index2 : Int, a : Array[T])(implicit condition : (T, T) => Boolean) :  Boolean = {
+    if(condition(a{index1}, a{index2})) {
+      swap(index1, index2,a)
       true
     }
     else false
   }
 
-  private def swap(index1 : Int, index2 : Int)(implicit array : Array[T]) : Unit = {
+  private def swap(index1 : Int, index2 : Int, a : Array[T]) : Unit = {
     if(isValidIndex(index1) && isValidIndex(index2)){
-      val temp = array{index1}
-      array{index1} = array{index2}
-      array{index2} = temp
+      val temp = a{index1}
+      a{index1} = a{index2}
+      a{index2} = temp
     }
   }
 
-  private def getLeastChildIndex(index : Int)(implicit array : Array[T]) : Option[Int] = {
-    val (leftChildIndex, rightChildIndex) = (getLeftChildIndex(index)(array), getRightChildIndex(index)(array))
+  private def getLeastChildIndex(index : Int, a : Array[T]) : Option[Int] = {
+    val (leftChildIndex, rightChildIndex) = (getLeftChildIndex(index, a), getRightChildIndex(index, a))
     (leftChildIndex,rightChildIndex) match {
       case (None, None) => None
       case (Some(i), None) => Some(i)
       case (None, Some(i)) => Some(i)
-      case (Some(i), Some(j)) => if(ordering.compare(array{i}, array{j}) < 0) Some(i) else Some(j)
+      case (Some(i), Some(j)) => if(ordering.compare(a{i}, a{j}) < 0) Some(i) else Some(j)
     }
   }
 
-  private def isValidIndex(index : Int)(implicit size : Int) : Boolean = index < size && index >= 0
+  private def isValidIndex(index : Int) : Boolean = index < heapSize && index >= 0
 
-  private def getLeftChildIndex(index : Int)(implicit array : Array[T]) : Option[Int] = {
+  private def getLeftChildIndex(index : Int, a : Array[T]) : Option[Int] = {
     val childIndex = (2*index) + 1
-    if(isValidIndex(childIndex)) Some(childIndex) else None
+    Some(childIndex).filter(isValidIndex)
   }
 
-  private def getRightChildIndex(index : Int)(implicit array : Array[T]) : Option[Int] = {
+  private def getRightChildIndex(index : Int, a : Array[T]) : Option[Int] = {
     val childIndex = (2*index) + 2
-    if(isValidIndex(childIndex))  Some(childIndex) else None
-  }
-
-  private def getParentIndex(index : Int) : Int = index%2 match {
-    case 0 => (index - 2)/2
-    case _ => (index - 1)/2
+    Some(childIndex).filter(isValidIndex)
   }
 
 }
