@@ -5,4 +5,4 @@ An attempt to write small programs in a functional way. For eg - implementing so
 The goal is to make people feel comfortable with the concepts of functional programming. Many of the programmers have encountered these algorithms and programs in their academics and interviews. The familiarity of the problems can really make it easier and interesting to comprehend the solutions.
 
 # Language
-I have started contributing in Scala. But feel free to contribute in any functional programming language of your choice.
+I started out with Scala to implement these programs. But recently included a program in clojure too. Feel free to contribute in any function language.
