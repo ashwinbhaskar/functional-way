@@ -1,5 +1,3 @@
-(defn mid-point [arr] (/ (count arr) 2))
-
 (defn merge-sorted-arrays
       "Merges two sorted arrays and returns a sorted array"
       [sorted-arr1 sorted-arr2]
@@ -17,8 +15,7 @@
 (defn merge-sort
       "Implements the merge sort algorithm and returns a sorted array"
       [num-array]
-      (let [first-half (take (mid-point num-array) num-array)
-            second-half (drop (mid-point num-array) num-array)]
+      (let [mid-point (/ (count num-array) 2) first-half (take mid-point num-array) second-half (drop mid-point num-array)]
            (cond
              (and (= (count first-half) 1) (= (count second-half) 1)) (merge-sorted-arrays first-half second-half)
              (empty? first-half) (merge-sorted-arrays [] second-half)
