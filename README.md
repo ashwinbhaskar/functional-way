@@ -6,3 +6,7 @@ The goal is to make people feel comfortable with the concepts of functional prog
 
 # Language
 I started out with Scala to implement these programs. But recently included a program in clojure too. Feel free to contribute in any function language.
+
+# Dependency
+
+You will need to have `sbt` for Scala and `leiningen` for Clojure installed.
