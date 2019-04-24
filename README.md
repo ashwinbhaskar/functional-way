@@ -1,4 +1,4 @@
-# functional-way
+# functional-way [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Functional%20programming%20with%20familiar%20problems&url=https://github.com/ashwinbhaskar/functional-way)
 An attempt to write small programs in a functional way. For eg - implementing sorting algorithms like merge sort, dynamic programming to solve 'n-dice' problem etc. Sure, some of the implementations are not optimal yet. But the idea is to collaborate and make them optimal while still trying to keep functions free of side effects and using immutable data structures.
 
 # Goal
