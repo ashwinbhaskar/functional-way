@@ -7,8 +7,8 @@ class MergeSortTest extends FunSuite {
 
 
   test("MergeSort.merge") {
-    val array1 = Utility.generateNumbers(size = 1000).sorted
-    val array2 = Utility.generateNumbers(size = 1000).sorted
+    val array1 = Utility.generateNumbers(size = 10000).sorted
+    val array2 = Utility.generateNumbers(size = 100000).sorted
     val mergedArray = MergeSort.merge(array1, array2)
     assert(mergedArray.length === (array1.length + array2.length))
     assert(array1.forall(mergedArray.contains))
