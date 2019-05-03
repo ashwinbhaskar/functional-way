@@ -1,0 +1,6 @@
+language: scala
+scala:
+  - 2.12.8
+
+script:
+ - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
