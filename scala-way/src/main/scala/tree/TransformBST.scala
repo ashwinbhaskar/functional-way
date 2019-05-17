@@ -1,7 +1,7 @@
 package tree
 /*
-Given a BST transform it to a Binary Tree where every node is replaced by the sum
-all the nodes greater than or equal to the node. If there are no nodes greater then replace it with 0
+Given a BST transform it to a Binary Tree where every node is replaced with the sum of
+all the node greater than the node. If there are no nodes greater than the node, replace it's value with 0
 Eg :-
     5                        27
    / \                      /  \
