@@ -1,4 +1,4 @@
-module GravitySort where
+module GravitySort (gravitySort) where
 
 {- Gravity/Bead Sort in Haskell
  -
@@ -21,4 +21,3 @@ matricize = map (\n -> take n . repeat $ 1)
 -- count number of 1s on each column of a binary matrix
 collapse :: [[Int]] -> [Int]
 collapse = map length . transpose
-
