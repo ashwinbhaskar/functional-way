@@ -8,6 +8,8 @@ matrix:
     - language: haskell
       ghc:
         - "8.6.3"
+      before_install:
+        - cd haskell-way  
       script:
         - cd $TRAVIS_BUILD_DIR/haskell-way; cabal v2-test
 
