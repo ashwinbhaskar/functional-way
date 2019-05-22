@@ -2,14 +2,13 @@ matrix:
   include:
     - language: scala
       scala:
-	      - 2.12.8
+      - 2.12.8
       script:
-	      - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
+      - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
     
     - language: haskell
       ghc:
         - "8.6.3"
-      cabal: "2.4"
       script:
         - cd $TRAVIS_BUILD/DIR/haskell-way; cabal v2-test
 
