@@ -5,8 +5,8 @@ An attempt to write small programs in a functional way. For eg - implementing so
 The goal is to make people feel comfortable with the concepts of functional programming. Many of the programmers have encountered these algorithms and programs in their academics and interviews. The familiarity of the problems can really make it easier and interesting to comprehend the solutions.
 
 # Language
-I started out with Scala to implement these programs. But recently included a program in clojure too. Feel free to contribute in any functional language.
+I started out with Scala to implement these programs. But recently included a programs in clojure too and people have started contributing in Haskell too!. Feel free to contribute in any functional language.
 
 # Dependency
 
-You will need to have `sbt` for Scala and `leiningen` for Clojure installed.
+You would need `sbt` for Scala, `leiningen` for Clojure and `cabal` for Haskell installed.
