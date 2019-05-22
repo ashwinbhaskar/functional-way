@@ -9,6 +9,6 @@ matrix:
       ghc:
         - "8.6.3"
       script:
-        - cd $TRAVIS_BUILD/DIR/haskell-way; cabal v2-test
+        - cd $TRAVIS_BUILD_DIR/haskell-way; cabal v2-test
 
 
