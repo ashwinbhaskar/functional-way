@@ -6,7 +6,7 @@ script:
  - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
 
 language: haskell
-cabal: "2.4.1.0"
+cabal: "2.4"
 
 matrix:
   include:
