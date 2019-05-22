@@ -1,6 +1,18 @@
-language: scala
-scala:
-  - 2.12.8
+matrix:
+  include:
+    - language: scala
+      scala:
+      - 2.12.8
+      script:
+      - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
+    - language: haskell
+      cabal:
+        - "2.4"
+      ghc:
+        - "8.6.3"
+      before_install:
+        - cd haskell-way  
+      script:
+        - cd $TRAVIS_BUILD_DIR/haskell-way; cabal v2-test
 
-script:
- - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
+
