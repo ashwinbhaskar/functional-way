@@ -20,6 +20,7 @@ install:
   cabal new-update
   cabal new-build --enable-tests --enable-benchmarks
 
+
 script:
  - cd $TRAVIS_BUILD_DIR/haskell-way; cabal v2-test
 
