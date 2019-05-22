@@ -1,4 +1,4 @@
-module MergeSort where
+module MergeSort (mergeSort) where
 
 -- I am a Haskell noob at the moment. This code was written for shits and giggles when I was
 -- reading the merge-sort code for clojure. I just thought, why not translate it to haskell when you are learning it
@@ -15,7 +15,7 @@ mergeSort  [] = []
 mergeSort [x] = [x]
 mergeSort  xs = merge (mergeSort firstHalf) (mergeSort secondHalf)
   where
-    (firstHalf, secondHalf) = splitAt (length xs `div` 2)
+    (firstHalf, secondHalf) = splitAt (length xs `div` 2) xs
 
 -- Poor man's test                    
 main :: IO ()
