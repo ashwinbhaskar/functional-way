@@ -1,6 +1,8 @@
 language: scala
 scala:
   - 2.12.8
+langauge: haskell
 
 script:
  - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
+ - cd $TRAVIS_BUILD_DIR/haskell-way; cabal v2-test
