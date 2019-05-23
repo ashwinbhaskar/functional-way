@@ -1,11 +1,13 @@
 module Main where
 
+-- import algorithms
 import GravitySort
 import MergeSort
+-- utility modules
 import System.Exit
 import Test.Util
 
--- testing array
+-- test array
 testList = [12234, 34532, 543, 1, 324, 6534]
 
 -- test gravity sort on a given list
@@ -14,7 +16,7 @@ testGravitySort x = and [isSorted x', areSame x x']
   where x' = gravitySort x
 
 -- test merge sort on a given list
-testMergeSort :: (Ord a) => [a] -> Bool
+testMergeSort :: Ord a => [a] -> Bool
 testMergeSort x = and [isSorted x', areSame x x']
   where x' = mergeSort x
 
