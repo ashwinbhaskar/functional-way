@@ -2,6 +2,7 @@ module Main where
 
 import GravitySort
 import MergeSort
+import QuickSort
 import System.Exit
 import Test.Util
 
@@ -18,6 +19,11 @@ testMergeSort :: (Ord a) => [a] -> Bool
 testMergeSort x = and [isSorted x', areSame x x']
   where x' = mergeSort x
 
+-- test quick sort on a given list
+testQuickSort :: (Ord a) => [a] -> Bool
+testQuickSort x = and [isSorted x', areSame x x']
+  where x' = quickSort x
+
 main :: IO ()
 main = if and allTests then exitSuccess else exitFailure
 
@@ -25,6 +31,7 @@ allTests :: [Bool]
 allTests =  [
     testGravitySort testList
   , testMergeSort testList
+  , testQuickSort testList
   ]
 
   
