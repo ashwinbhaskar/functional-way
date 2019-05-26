@@ -9,6 +9,7 @@ library
   exposed-modules:
       GravitySort
     , MergeSort
+    , SelectionSort
   build-depends:       base ^>=4.12.0.0
   hs-source-dirs:      src
   default-language:    Haskell2010
@@ -20,6 +21,6 @@ test-suite test
   build-depends:
       base ^>=4.12.0.0
     , haskell-way
-  hs-source-dir:       test
+  hs-source-dirs:      test
   main-is:             Test.hs
   default-language:    Haskell2010
