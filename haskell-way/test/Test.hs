@@ -3,6 +3,7 @@ module Main where
 -- import algorithms
 import GravitySort
 import MergeSort
+import QuickSort
 import SelectionSort
 
 -- utility modules
@@ -22,6 +23,11 @@ testMergeSort :: Ord a => [a] -> Bool
 testMergeSort x = and [isSorted x', areSame x x']
   where x' = mergeSort x
 
+-- test quick sort on a given list
+testQuickSort :: (Ord a) => [a] -> Bool
+testQuickSort x = and [isSorted x', areSame x x']
+  where x' = quickSort x
+
 -- test selection sort on a given list
 testSelectionSort :: Ord a => [a] -> Bool
 testSelectionSort x = and [isSorted x', areSame x x']
@@ -34,6 +40,7 @@ allTests :: [Bool]
 allTests =  [
     testGravitySort testList
   , testMergeSort testList
+  , testQuickSort testList
   , testSelectionSort testList
   ]
 
