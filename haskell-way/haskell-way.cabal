@@ -8,6 +8,7 @@ homepage:            https://github.com/ashwinbhaskar/functional-way
 library
   exposed-modules:
       GravitySort
+    , InsertionSort
     , MergeSort
     , QuickSort
     , SelectionSort
