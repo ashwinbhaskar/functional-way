@@ -1,14 +1,15 @@
 module Main where
 
 -- import algorithms
-import GravitySort
-import MergeSort
-import QuickSort
-import SelectionSort
+import           GravitySort
+import           InsertionSort
+import           MergeSort
+import           QuickSort
+import           SelectionSort
 
 -- utility modules
-import System.Exit
-import Test.Util
+import           System.Exit
+import           Test.Util
 
 -- test array
 testList = [12234, 34532, 543, 1, 324, 6534]
@@ -17,6 +18,11 @@ testList = [12234, 34532, 543, 1, 324, 6534]
 testGravitySort :: [Int] -> Bool
 testGravitySort x = and [isSorted x', areSame x x']
   where x' = gravitySort x
+
+-- test insertion sort
+testInsertionSort :: Ord a => [a] -> Bool
+testInsertionSort x = and [isSorted x', areSame x x']
+  where x' = insertionSort x
 
 -- test merge sort on a given list
 testMergeSort :: Ord a => [a] -> Bool
@@ -39,9 +45,10 @@ main = if and allTests then exitSuccess else exitFailure
 allTests :: [Bool]
 allTests =  [
     testGravitySort testList
+  , testInsertionSort testList
   , testMergeSort testList
   , testQuickSort testList
   , testSelectionSort testList
   ]
 
-  
+
