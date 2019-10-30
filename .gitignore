@@ -4,3 +4,6 @@
 /clojure-way/target
 /clojure-way/.idea
 /haskell-way/dist
+scala-way/.idea/*
+.DS_Store
+.idea/
