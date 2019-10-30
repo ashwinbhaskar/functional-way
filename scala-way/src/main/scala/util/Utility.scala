@@ -11,4 +11,10 @@ object Utility {
 
   def generateNumbers(size: Int): Array[Int] = (1 to size).map(_ => Random.nextInt()).toArray
 
+  def swap(arr: Array[Int], pos1: Int, pos2: Int): Array[Int] = {
+    val elem1 = arr(pos1)
+    val elem2 = arr(pos2)
+    arr.updated(pos1, elem2).updated(pos2, elem1)
+  }
+
 }
