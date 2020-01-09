@@ -16,15 +16,19 @@ object FractionalKnapsack extends App {
         case (vi, wi) => ((vi.toFloat/wi),wi)
     }
     
-    def recurse(map: TreeMap[ValuePerWeight, Weight], currentCapacity: Weight): OptimalSolution =  
-        if(map.isEmpty) 0
-        else {
-            val (valuePerWeight, weight) = map.head
-            if(weight <= currentCapacity) weight * valuePerWeight + recurse(map.tail, currentCapacity - weight)
-            else currentCapacity * valuePerWeight
-        }
+    def recurse(map: TreeMap[ValuePerWeight, Weight], currentCapacity: Weight): OptimalSolution =  map match {
+      case TreeMapExtractor((valuePerWeight, weight), restEntries) => 
+        if(weight <= currentCapacity) weight * valuePerWeight + recurse(map.tail, currentCapacity - weight)
+        else currentCapacity * valuePerWeight
+      case _ => 0
+    }
         
     val map: TreeMap[ValuePerWeight, Weight] = TreeMap(array:_*)(implicitly[Ordering[Float]].reverse)
     recurse(map = map, currentCapacity = knapsackCapacity)
   }
+
+  object TreeMapExtractor {
+    def unapply[K,V](treeMap: TreeMap[K,V]): Option[((K,V), TreeMap[K,V])] = treeMap.headOption.map((_, treeMap.tail))
+  }
+
 }
