@@ -5,8 +5,8 @@ version := "0.1"
 
 scalaVersion := dottyVersion
 
-libraryDependencies ++= Seq("org.scalatest" % "scalatest_2.13" % "3.2.0-M2" % "test",
-  "org.scalacheck" % "scalacheck_2.13" % "1.14.0" % "test")
+libraryDependencies ++= Seq("org.scalacheck" % "scalacheck_2.13" % "1.14.0" % "test",
+"com.novocode" % "junit-interface" % "0.11" % "test")
 
 javaOptions in Test ++= Seq("-Dconfig.file=ci.conf")
 
