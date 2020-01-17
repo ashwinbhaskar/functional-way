@@ -1,4 +1,6 @@
-/scala-way/project
+/scala-way/project/metals.sbt
+/scala-way/project/project
+/scala-way/project/target
 /scala-way/target
 /scala-way/.idea
 /clojure-way/target
