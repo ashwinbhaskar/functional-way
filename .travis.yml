@@ -4,7 +4,7 @@ matrix:
       jdk:
         - openjdk8
       script:
-        - cd $TRAVIS_BUILD_DIR/scala-way; sbt 'set scalaVersion := dottyLatestNightlyBuild.get' compile test
+        - cd $TRAVIS_BUILD_DIR/scala-way; sbt 'set scalaVersion := dottyLatestNightlyBuild.get' compile
     - language: haskell
       cabal:
         - "2.4"
