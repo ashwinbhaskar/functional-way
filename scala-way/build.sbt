@@ -1,11 +1,12 @@
 name := "scala-way"
+val dottyVersion = "0.21.0-RC1"
 
 version := "0.1"
 
-scalaVersion := "2.12.8"
+scalaVersion := dottyVersion
 
-libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.0.5" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.14.0" % "test")
+libraryDependencies ++= Seq("org.scalacheck" % "scalacheck_2.13" % "1.14.0" % "test",
+"com.novocode" % "junit-interface" % "0.11" % "test")
 
 javaOptions in Test ++= Seq("-Dconfig.file=ci.conf")
 

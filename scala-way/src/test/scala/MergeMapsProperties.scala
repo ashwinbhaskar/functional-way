@@ -1,5 +1,6 @@
 import org.scalacheck._
-import misc._
+import misc.mergeMaps
+import scala.language.implicitConversions
 
 class MergeMapsProperties extends Properties(name = "MergeMaps") {
 
@@ -15,7 +16,7 @@ class MergeMapsProperties extends Properties(name = "MergeMaps") {
       ms.nonEmpty ==> {
         val allKeys = ms.map(_.keySet).reduce(_ ++ _)
         def expVal(k: String): T = ms.flatMap(_.get(k).toSeq).reduceLeft(f)
-        val res = MergeMaps.merge(f, ms:_*)
+        val res = mergeMaps(f, ms:_*)
         res.keySet == allKeys && allKeys.forall(k => res(k) == expVal(k))
         // Actually this is an alternative implementation of MergeMaps... :/
         // val exp = allKeys.map(k => (k, expVal(k))).toMap

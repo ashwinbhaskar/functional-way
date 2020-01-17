@@ -1,22 +1,24 @@
-import org.scalatest.FunSuite
-import greedy.GroupChildren
+import org.junit.Test
+import org.junit.Assert._
+import org.junit._
+import greedy.minGroups
 
-class GroupChildrenTest extends FunSuite {
-    test("Should return the correct number of minimum groups") {
+class GroupChildrenTest {
+    @Test def happyPathTest() = {
         val childrenAges = Array(2, 2.5f, 3, 4)
-        val minGroups = GroupChildren.minGroups(childrenAges)
-        assert(minGroups == 2)
+        val result = minGroups(childrenAges)
+        assertTrue(result == 2)
     }
 
-    test("Should return the number of children as the answer when no groupings are possible") {
+    @Test def noGroupingsPossible() =  {
         val childrenAges = Array(2, 3.5f, 4.6f,6)
-        val minGroups = GroupChildren.minGroups(childrenAges)
-        assert(minGroups == 4)
+        val result = minGroups(childrenAges)
+        assertTrue(result == 4)
     }
 
-    test("Should return 0 when no children ages are given") {
+    @Test def noChildrenGiven() =  {
         val childrenAges = Array[Float]()
-        val minGroups = GroupChildren.minGroups(childrenAges)
-        assert(minGroups == 0)
+        val result = minGroups(childrenAges)
+        assertTrue(result == 0)
     }
 }

@@ -8,12 +8,7 @@ rolling a 1 three times.
 
 So, the number of ways = 4
  */
-
-object DiceProblem extends App {
-
-  println(noOfWays(3))
-
-  def noOfWays(n : Int) : BigInt = n match {
+def noOfWays(n : Int) : BigInt = n match
     case 0 => 0
     case a if a <= 6 => 1 + (1 to a).map(i => noOfWays(a - i)).sum
     case _ =>
@@ -23,8 +18,7 @@ object DiceProblem extends App {
       (7 to n).foreach( i =>
         array(i) = array(i-6) + array(i-5) + array(i-4) + array(i-3) + array(i-2) + array(i-1))
       array(n)
-  }
 
-
-}
+@main def diceProblem = 
+  println(noOfWays(3))
 

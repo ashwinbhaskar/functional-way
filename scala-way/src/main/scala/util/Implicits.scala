@@ -1,4 +1,5 @@
 package util
+import scala.language.implicitConversions
 
 object Implicits {
 
