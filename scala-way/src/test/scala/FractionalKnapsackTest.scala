@@ -1,20 +1,22 @@
-import org.scalatest.FunSuite
-import greedy.{FractionalKnapsack => fk}
+import org.junit.Test
+import org.junit.Assert._
+import org.junit._
+import greedy.maxValue
 
-class FractionalKnapsackTest extends FunSuite {
-    test("Should return the correct max value") {
+class FractionalKnapsackTest {
+    @Test def happyPath() =  {
         val itemWeights = Array(4, 3, 2)
         val itemValues = Array(20, 18, 14)
         val maxCapacity = 7
-        val optimalSolution = fk.maxValue(itemWeights, itemValues, maxCapacity)
-        assert(optimalSolution == 42)
+        val optimalSolution = maxValue(itemWeights, itemValues, maxCapacity)
+        assertTrue(optimalSolution == 42)
     }
 
-    test("Should return 0 when there are no weights") {
+    @Test def noWeightsGiven() =  {
         val itemWeights = Array[Int]()
         val itemValues = Array[Int]()
         val maxCapacity = 7
-        val optimalSolution = fk.maxValue(itemWeights, itemValues, maxCapacity)
-        assert(optimalSolution == 0)
+        val optimalSolution = maxValue(itemWeights, itemValues, maxCapacity)
+        assertTrue(optimalSolution == 0)
     }
 }

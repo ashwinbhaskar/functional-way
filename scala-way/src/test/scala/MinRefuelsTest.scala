@@ -1,24 +1,26 @@
-import org.scalatest.FunSuite
-import greedy.MinimumRefuels
+import org.junit.Test
+import org.junit.Assert._
+import org.junit._
+import greedy.minimumRefuels
 
-class MinRefuelsTest extends FunSuite {
+class MinRefuelsTest {
 
-    test("Should return the correct min refuels when solution is possible"){
+    @Test def happyPathTest() = {
         val stops = Array(10,40,70,80)
-        val minRefuels = MinimumRefuels.minimumRefuels(stops = stops, distanceToPointB = 100)(maxDistanceOnFullTank = 30)
-        assert(minRefuels == Some(3))
+        val minRefuels = minimumRefuels(stops = stops, distanceToPointB = 100)(maxDistanceOnFullTank = 30)
+        assertTrue(minRefuels == Some(3))
     }
 
-    test("Should return none if there solution is not possible"){
+    @Test def noSolutionPossible() = {
         val stops = Array(10,50,70,80)
-        val minRefuels = MinimumRefuels.minimumRefuels(stops = stops, distanceToPointB = 100)(maxDistanceOnFullTank = 30)
-        assert(minRefuels == None)
+        val minRefuels = minimumRefuels(stops = stops, distanceToPointB = 100)(maxDistanceOnFullTank = 30)
+        assertTrue(minRefuels == None)
     }
 
-    test("Should return 0 when no stops are required"){
+    @Test def noStopsRequired() = {
         val stops = Array(10,50,70,80)
-        val minRefuels = MinimumRefuels.minimumRefuels(stops = stops, distanceToPointB = 100)(maxDistanceOnFullTank = 101)
-        assert(minRefuels == Some(0))
+        val minRefuels = minimumRefuels(stops = stops, distanceToPointB = 100)(maxDistanceOnFullTank = 101)
+        assertTrue(minRefuels == Some(0))
     }
 
 }

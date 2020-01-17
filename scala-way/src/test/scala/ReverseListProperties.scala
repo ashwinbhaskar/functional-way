@@ -1,4 +1,4 @@
-import misc.ReverseList
+import misc.reverse
 import org.scalacheck.{Arbitrary, Cogen, Prop, Properties}
 import org.scalacheck.Prop.forAll
 
@@ -8,9 +8,9 @@ class ReverseListProperties extends Properties(name = "ReverseList"){
   property("reverse/String") = reverseProp[String]
 
   private def reverseProp[T : Arbitrary : Cogen]: Prop = {
-    forAll{ list: List[T] =>
-      val reverseList = ReverseList.reverse(list)
-      reverseList == list.reverse
+    forAll{ (list: List[T]) =>
+      val reversedList = reverse(list)
+      reversedList == list.reverse
     }
   }
 

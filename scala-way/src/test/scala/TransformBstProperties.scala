@@ -2,7 +2,7 @@ import org.scalacheck.{Gen, Properties}
 import org.scalacheck.Gen._
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Arbitrary.arbitrary
-import tree.TransformBST
+import tree.transformBst
 
 class TransformBstProperties extends Properties("TransformBST") {
 
@@ -31,8 +31,8 @@ class TransformBstProperties extends Properties("TransformBST") {
   }
 
   //Not a complete test here. But a good one to begin with
-  property("transformBst") = forAll(genTree) { root : Node =>
-    val transformedTreeRoot = TransformBST.transformBst(root)
+  property("transformBst") = forAll(genTree) { (root : Node) =>
+    val transformedTreeRoot = transformBst(root)
     isZeroPresent(Some(transformedTreeRoot))
   }
 
