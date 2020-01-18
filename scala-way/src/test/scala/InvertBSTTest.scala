@@ -33,4 +33,21 @@ class InvertBSTTest {
     val expectedTree = InvertNode(1)
     assertTrue(invert(testTree) == expectedTree)
   }
+
+  @Test def symmeticalTree() = {
+    val symTree = InvertNode(
+      1,
+      Some(InvertNode(
+        2,
+        Some(InvertNode(3)),
+        Some(InvertNode(4))
+      )),
+      Some(InvertNode(
+        2,
+        Some(InvertNode(4)),
+        Some(InvertNode(3))
+      ))
+    )
+    assertTrue(invert(symTree) == symTree)
+  }
 }
