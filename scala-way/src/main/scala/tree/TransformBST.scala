@@ -13,51 +13,53 @@ Eg :-
 
  */
 
-case class Node(value: Int, left: Option[Node], right: Option[Node])
+type MaybeNode = Node | Null
 
-sealed trait NodeType
+case class Node(value: Int, left: MaybeNode, right: MaybeNode)
+
+enum NodeType
+  case PureType, RightNodeType, LeftNodeType  //PureType is a node that is not left child of any node and none of it's ancestors are a left child of any node
   def &&(anotherNode: NodeType): NodeType = (this, anotherNode) match
     case (a, b) if a == b => a //both are same types
     case (PureType, RightNodeType) => PureType
     case (RightNodeType, PureType) => PureType
     case _ => this
 
-object PureType extends NodeType //A node that is not left child of any node and none of it's ancestors are a left child of any node
-object RightNodeType extends NodeType
-object LeftNodeType extends NodeType
-
 /**
    @param root The root node of the tree to be transformed.
    @return The root node of the transformed tree
 **/
 def transformBst(root: Node): Node =
-  def internalFunc(node: Option[Node], nodeType: NodeType, parentWeight: Int, origParentValue: Int): Option[Node] = node match
-    case Some(n) =>
+  import NodeType._
+  def internalFunc(node: MaybeNode, nodeType: NodeType, parentWeight: Int, origParentValue: Int): MaybeNode = node match
+    case n: Node =>
       val transformedValue = nodeType match
         case PureType => sumRightChildren(n)
         case RightNodeType => sumRightChildren(n) + parentWeight
         case LeftNodeType => sumRightChildren(n) + parentWeight + origParentValue
       val rightChild = internalFunc(n.right, nodeType = RightNodeType && nodeType, parentWeight = parentWeight + origParentValue, origParentValue = n.value)
       val leftChild = internalFunc(n.left, nodeType = LeftNodeType && nodeType, parentWeight = transformedValue, origParentValue = n.value)
-      Some(Node(transformedValue, left = leftChild, right = rightChild))
-    case None =>
-      None
-  internalFunc(Some(root), nodeType = PureType, parentWeight = 0, origParentValue = 0).get
+      Node(transformedValue, left = leftChild, right = rightChild)
+    case null => 
+      null
+  internalFunc(root, nodeType = PureType, parentWeight = 0, origParentValue = 0) match 
+    case n: Node => n
+    case null => throw Exception("This is not possible") //How can we avoid this code?
 
 private def sumRightChildren(node: Node): Int =
-  def internalFunc(a: Option[Node]): Int = a match
-    case Some(n) => n.value + internalFunc(n.left) + internalFunc(n.right)
-    case None => 0
+  def internalFunc(a: MaybeNode): Int = a match
+    case n: Node => n.value + internalFunc(n.left) + internalFunc(n.right)
+    case null => 0
   internalFunc(node.right)
 
 @main def bstTransformer = 
   val root : Node = 
-    val leaf1 = Node(1, None, None)
-    val leaf2 = Node(6, None, None)
-    val leaf3 = Node(8, None, None)
-    val interim1 = Node(2, Some(leaf1), None)
-    val interim3 = Node(6, None, Some(leaf2))
-    val interim2 = Node(7, Some(interim3), Some(leaf3))
-    Node(5, Some(interim1), Some(interim2))
+    val leaf1 = Node(1, null, null)
+    val leaf2 = Node(6, null, null)
+    val leaf3 = Node(8, null, null)
+    val interim1 = Node(2, null, null)
+    val interim3 = Node(6, null, leaf2)
+    val interim2 = Node(7, interim3, leaf3)
+    Node(5, interim1, interim2)
   val transformedRoot = transformBst(root)
   println(s"transformed root value = ${transformedRoot.value}")
