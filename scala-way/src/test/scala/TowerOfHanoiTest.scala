@@ -1,7 +1,8 @@
 import org.junit.Test
 import org.junit.Assert._
 import org.junit._
-import divideandconquer.{towerOfHanoi, Peg, Move}
+import divideandconquer.towerOfHanoi
+import types.{Move, Peg}
 
 class TowerOfHanoiTest {
     @Test

@@ -12,16 +12,10 @@ The only rules are
 • a larger disk may never be stacked on top of a smaller one
 */
 
-opaque type Peg = String
-object Peg
-    def apply(string: String): Peg = string
-
-opaque type Move = (Peg, Peg)
-object Move
-    def apply(fromPeg: Peg, toPeg: Peg): Move = (fromPeg, toPeg)
+import types.{Peg, Move}
 
 def towerOfHanoi(numberOfDiscs: Int, fromPeg: Peg, toPeg: Peg, bufferPeg: Peg): List[Move] = numberOfDiscs match
     case 0 => List()
-    case n => towerOfHanoi(n-1, fromPeg, bufferPeg, toPeg) ++ List((fromPeg, toPeg)) ++ towerOfHanoi(n-1, bufferPeg, toPeg, fromPeg)
+    case n => towerOfHanoi(n-1, fromPeg, bufferPeg, toPeg) ++ List(Move(fromPeg, toPeg)) ++ towerOfHanoi(n-1, bufferPeg, toPeg, fromPeg)
 
     
