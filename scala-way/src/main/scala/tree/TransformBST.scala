@@ -17,7 +17,7 @@ type MaybeNode = Node | Null
 
 case class Node(value: Int, left: MaybeNode, right: MaybeNode)
 
-enum NodeType
+enum NodeType:
   case PureType, RightNodeType, LeftNodeType  //PureType is a node that is not left child of any node and none of it's ancestors are a left child of any node
   def &&(anotherNode: NodeType): NodeType = (this, anotherNode) match
     case (a, b) if a == b => a //both are same types
