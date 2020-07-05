@@ -1,5 +1,5 @@
 name := "scala-way"
-val dottyVersion = "0.22.0"
+val dottyVersion = "0.24.0"
 
 version := "0.1"
 
