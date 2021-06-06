@@ -13,11 +13,10 @@ Eg :-
 
  */
 
-final case class InvertNode(
-  value: Int,
-  left: Option[InvertNode] = None,
-  right: Option[InvertNode] = None
-)
+import scala.math.Ordering
+import BinaryTree._
 
-def invert(n: InvertNode): InvertNode =
-  InvertNode(n.value, n.right.map(invert), n.left.map(invert))
+def inverse[A](tree: BinaryTree[A]): BinaryTree[A] =
+  tree match
+    case Leaf => Leaf
+    case Node(left, v, right) => Node(inverse(right), v, inverse(left))
