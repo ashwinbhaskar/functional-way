@@ -4,7 +4,7 @@ matrix:
       jdk:
         - openjdk8
       script:
-        - cd $TRAVIS_BUILD_DIR/scala-way; sbt 'set scalaVersion := "0.24.0"' compile test
+        - cd $TRAVIS_BUILD_DIR/scala-way; sbt compile test
     - language: haskell
       cabal:
         - "2.4"
