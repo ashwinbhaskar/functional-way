@@ -3,13 +3,13 @@ import org.scalacheck.Gen._
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Arbitrary.arbitrary
 import tree.transformBst
-import tree.MaybeNode
 
 class TransformBstProperties extends Properties("TransformBST") {
 
-  import tree.Node
+  import tree.BinaryTree
+  import tree.BinaryTree._
 
-  private val leafNodeGen : Gen[Node] = arbitrary[Int].map(v => Node(left = null, right = null, value = v))
+  private val leafNodeGen : Gen[BinaryTree[Int]] = arbitrary[Int].map(v => Node(left = Leaf, value = v, right = Leaf))
 
   private val nodeGen = for {
     v <- arbitrary[Int]
@@ -17,22 +17,22 @@ class TransformBstProperties extends Properties("TransformBST") {
     right <- genTree
   } yield Node(value = v, left = left, right = right)
 
-  private val genTree : Gen[Node] = oneOf(nodeGen, leafNodeGen)
+  private val genTree : Gen[BinaryTree[Int]] = oneOf(nodeGen, leafNodeGen)
 
   /**
     @param node : The root node of the tree.
     @return True if zero is present in the tree (if the transformation when correct, there is guaranteed
                     to be zero.)
   */
-  private def isZeroPresent(node : MaybeNode) : Boolean = node match {
-    case n: Node => if(n.value == 0) true else {
-      isZeroPresent(n.left) || isZeroPresent(n.right)
+  private def isZeroPresent(node : BinaryTree[Int]) : Boolean = node match {
+    case Node(left, value, right) => if(value == 0) true else {
+      isZeroPresent(left) || isZeroPresent(right)
     }
-    case null => false
+    case Leaf => false
   }
 
   //Not a complete test here. But a good one to begin with
-  property("transformBst") = forAll(genTree) { (root : Node) =>
+  property("transformBst") = forAll(genTree) { (root : BinaryTree[Int]) =>
     val transformedTreeRoot = transformBst(root)
     isZeroPresent(transformedTreeRoot)
   }

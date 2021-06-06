@@ -1,53 +1,55 @@
-import tree.{ invert, InvertNode }
+import tree.inverse
+import tree.BinaryTree
+import tree.BinaryTree._
 
 import org.junit.Test
 import org.junit.Assert._
 import org.junit._
 
-class InvertBSTTest {
+class InverseBSTTest {
   @Test def fullTreeTest() = {
-    val testTree = InvertNode(
+    val testTree = Node[Int](
+      Node(Leaf, 2, Leaf),
       1,
-      Some(InvertNode(2)),
-      Some(InvertNode(
+      Node(
+        Node(Leaf, 4, Leaf),
         3,
-        Some(InvertNode(4)),
-        Some(InvertNode(5))
-      ))
+        Node(Leaf, 5, Leaf)
+      )
     )
 
-    val expectedTree = InvertNode(
-      1,
-      Some(InvertNode(
+    val expectedTree = inverse(Node(
+      Node(
+        Node(Leaf, 5, Leaf),
         3,
-        Some(InvertNode(5)),
-        Some(InvertNode(4))
-      )),
-      Some(InvertNode(2))
-    )
-    assertTrue(invert(testTree) == expectedTree)
+        Node(Leaf, 4, Leaf)
+      ),
+      1,
+      Node(Leaf, 2, Leaf)
+    ))
+    assertTrue(inverse(testTree) == expectedTree)
   }
 
   @Test def emptyTree() = {
-    val testTree = InvertNode(1)
-    val expectedTree = InvertNode(1)
-    assertTrue(invert(testTree) == expectedTree)
+    val testTree = inverse(Node(Leaf, 1, Leaf))
+    val expectedTree = inverse(Node(Leaf, 1, Leaf))
+    assertTrue(inverse(testTree) == expectedTree)
   }
 
   @Test def symmeticalTree() = {
-    val symTree = InvertNode(
+    val symTree = inverse(Node(
+      Node(
+        Node(Leaf, 3, Leaf),
+        2,
+        Node(Leaf, 4, Leaf)
+      ),
       1,
-      Some(InvertNode(
+      Node(
+        Node(Leaf, 3, Leaf),
         2,
-        Some(InvertNode(3)),
-        Some(InvertNode(4))
-      )),
-      Some(InvertNode(
-        2,
-        Some(InvertNode(4)),
-        Some(InvertNode(3))
-      ))
-    )
-    assertTrue(invert(symTree) == symTree)
+        Node(Leaf, 4, Leaf)
+      )
+    ))
+    assertTrue(inverse(symTree) == symTree)
   }
 }
